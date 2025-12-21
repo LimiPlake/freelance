@@ -10,7 +10,7 @@ questions.forEach((q, i) => {
 
 // Add behavior to each Submit button
 questions.forEach((question, index) => {
-  const button = question.querySelector("button");
+  const button = question.querySelector("button"); 
   const radios = question.querySelectorAll("input[type='radio']");
   const feedback = question.querySelector(".feedback");
 
