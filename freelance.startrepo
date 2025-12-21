@@ -1,0 +1,14 @@
+repo "freelance" set 'none' {
+  desc " "
+
+  public invite null
+  own; org [LimiPlake];;
+
+  readme NONE
+  license TRUE
+  coc NONE
+
+  org:ownr [{Anhad Jain}\MrAJCoding>]
+}
+
+repo start
