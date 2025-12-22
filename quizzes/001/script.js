@@ -3,50 +3,63 @@ document.addEventListener("DOMContentLoaded", () => {
   // Get all quiz questions
   const questions = document.querySelectorAll(".question");
 
-  // Hide all questions except the first one
+  // Hide all questions except the first
   questions.forEach((q, i) => {
     if (i !== 0) {
       q.style.display = "none";
     }
   });
 
-  // Add behavior to each Submit button
+  // Add logic to each question
   questions.forEach((question, index) => {
-    const button = question.querySelector("button");
+    const submitButton = question.querySelector("button");
     const radios = question.querySelectorAll("input[type='radio']");
     const feedback = question.querySelector(".feedback");
 
-    button.addEventListener("click", () => {
+    // Create "Next Question" button (hidden by default)
+    const nextButton = document.createElement("button");
+    nextButton.textContent = "Next Question";
+    nextButton.style.display = "none";
+    question.appendChild(nextButton);
 
-      // Find selected radio button
+    submitButton.addEventListener("click", () => {
+
+      // Find selected answer
       let selected = null;
       radios.forEach(radio => {
-        if (radio.checked) selected = radio;
+        if (radio.checked) {
+          selected = radio;
+        }
       });
 
-      // If no answer selected, do nothing
+      // Do nothing if no answer selected
       if (!selected) return;
 
-      // Show feedback
+      // Correct answer
       if (selected.dataset.correct === "true") {
         feedback.textContent = "✅ Correct!";
+
+        // Lock question
+        radios.forEach(radio => radio.disabled = true);
+        submitButton.disabled = true;
+
+        // Show Next button
+        nextButton.style.display = "inline-block";
+
       } else {
+        // Incorrect answer: allow retry, no hints
         feedback.textContent = "❌ Incorrect";
+        selected.checked = false;
       }
+    });
 
-      // Lock question (one try only)
-      radios.forEach(radio => radio.disabled = true);
-      button.disabled = true;
+    // Move to next question only when user clicks Next
+    nextButton.addEventListener("click", () => {
+      question.style.display = "none";
 
-      // Wait 10 seconds so feedback can be read
-      setTimeout(() => {
-        question.style.display = "none";
-
-        // Show next question in the same place
-        if (questions[index + 1]) {
-          questions[index + 1].style.display = "block";
-        }
-      }, 10000);
+      if (questions[index + 1]) {
+        questions[index + 1].style.display = "block";
+      }
     });
   });
 
