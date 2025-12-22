@@ -1,15 +1,3 @@
-/*
-  LimiPlake A Minor Scales Quiz
-  Version: 0.23
-
-  Behavior rules:
-  - No hints
-  - No auto-advance
-  - Retry allowed on incorrect
-  - Advance only after correct
-  - Next Question button spaced from feedback
-*/
-
 document.addEventListener("DOMContentLoaded", () => {
 
   // Get all quiz questions
@@ -32,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const nextButton = document.createElement("button");
     nextButton.textContent = "Next Question";
     nextButton.style.display = "none";
-    nextButton.style.marginTop = "16px"; // spacing from yn feedback
+    nextButton.style.marginTop = "16px"; // even spacing from yn
 
     question.appendChild(nextButton);
 
@@ -46,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       });
 
-      // Do nothing if no answer selected
+      // Do nothing if no selection
       if (!selected) return;
 
       // Correct answer
@@ -57,17 +45,17 @@ document.addEventListener("DOMContentLoaded", () => {
         radios.forEach(radio => radio.disabled = true);
         submitButton.disabled = true;
 
-        // Show Next button
+        // User explicitly chooses when to move on
         nextButton.style.display = "inline-block";
 
       } else {
-        // Incorrect answer: allow retry, no hints
+        // Incorrect: allow retry, no hints
         feedback.textContent = "❌ Incorrect";
         selected.checked = false;
       }
     });
 
-    // Move to next question only when user clicks Next
+    // Move forward ONLY when user clicks Next
     nextButton.addEventListener("click", () => {
       question.style.display = "none";
 
