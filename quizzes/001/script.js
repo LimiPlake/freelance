@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         nextButton.style.display = "inline-block";
       } else {
-        feedback.textContent = "❌ Incorrect";
+        feedback.textContent = "That's not the answer. Try again.";
         selected.checked = false;
       }
     });
