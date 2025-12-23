@@ -10,7 +10,7 @@
   - v-0.82: backward navigation added
 */
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => { 
 
   const questions = document.querySelectorAll(".question");
   const quizArea = document.getElementById("quiz-display-area");
