@@ -42,8 +42,10 @@ document.addEventListener("DOMContentLoaded", () => {
     prevButton.style.marginTop = "16px";
 
     if (index === 0) {
-      prevButton.style.display = "none";
-    }
+  prevButton.style.display = "none";
+} else {
+  prevButton.style.display = "inline-block";
+}
 
     question.appendChild(prevButton);
 
