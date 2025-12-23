@@ -1,12 +1,13 @@
 /*
   LimiPlake – A Minor Scales Quiz
-  Version: v-0.80
+  Version: v-0.82
 
   Includes:
-  - Bug #1 fixed (language consistency)
-  - Bug #2 fixed (no waiting, no auto-advance)
-  - Bug #3 fixed (retry allowed, no hints)
-  - Question 3 ends with "Finish Quiz" and finish screen
+  - v-0.31: language consistency
+  - v-0.32: no waiting / user-controlled navigation
+  - Bug #3 fixed: retry allowed, no hints
+  - v-0.80: finish screen
+  - v-0.82: backward navigation added
 */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -19,16 +20,15 @@ document.addEventListener("DOMContentLoaded", () => {
     if (i !== 0) q.style.display = "none";
   });
 
-  // Create finish screen (hidden initially)
+  // Finish screen
   const finishScreen = document.createElement("div");
   finishScreen.style.display = "none";
   finishScreen.innerHTML = `
-    <h2>🎉 Quiz Complete!</h2>
-    <p>Thank you for completing the A Minor Scales Quiz!</p>
-      `;
+    <h2>🎉 Quiz Complete</h2>
+    <p>Thank you for completing the A Minor Scales Quiz.</p>
+  `;
   quizArea.appendChild(finishScreen);
 
-  // Attach logic to each question
   questions.forEach((question, index) => {
     const submitButton = question.querySelector("button");
     const radios = question.querySelectorAll("input[type='radio']");
@@ -36,13 +36,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const isLastQuestion = index === questions.length - 1;
 
-    // Create navigation button
+    /* ---------- Previous Button ---------- */
+    const prevButton = document.createElement("button");
+    prevButton.textContent = "Back";
+    prevButton.style.marginTop = "16px";
+
+    if (index === 0) {
+      prevButton.style.display = "none";
+    }
+
+    question.appendChild(prevButton);
+
+    /* ---------- Next / Finish Button ---------- */
     const nextButton = document.createElement("button");
     nextButton.textContent = isLastQuestion ? "Finish Quiz" : "Next Question";
     nextButton.style.display = "none";
-    nextButton.style.marginTop = "16px"; // spacing from yn feedback
+    nextButton.style.marginTop = "16px";
+
     question.appendChild(nextButton);
 
+    /* ---------- Submit Logic ---------- */
     submitButton.addEventListener("click", () => {
       let selected = null;
 
@@ -55,20 +68,18 @@ document.addEventListener("DOMContentLoaded", () => {
       if (selected.dataset.correct === "true") {
         feedback.textContent = "✅ Correct!";
 
-        // Lock question after correct answer
+        // Lock question
         radios.forEach(radio => radio.disabled = true);
         submitButton.disabled = true;
 
-        // Allow user to move forward
         nextButton.style.display = "inline-block";
-
       } else {
-        // Incorrect: allow retry, no hints
-        feedback.textContent = "That's not right. Try again!";
+        feedback.textContent = "❌ Incorrect";
         selected.checked = false;
       }
     });
 
+    /* ---------- Forward Navigation ---------- */
     nextButton.addEventListener("click", () => {
       question.style.display = "none";
 
@@ -77,6 +88,12 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         questions[index + 1].style.display = "block";
       }
+    });
+
+    /* ---------- Backward Navigation ---------- */
+    prevButton.addEventListener("click", () => {
+      question.style.display = "none";
+      questions[index - 1].style.display = "block";
     });
   });
 
