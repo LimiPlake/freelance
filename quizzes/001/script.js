@@ -1,121 +1,77 @@
 /*
   LimiPlake – A Minor Scales Quiz
-  Version: v-0.84
+  Version: 1.0
 
-  Includes:
-  - v-0.31: language consistency
-  - v-0.32: no waiting / user-controlled navigation
-  - Bug #3 fixed: retry allowed, no hints
-  - v-0.80: finish screen
-  - v-0.82: backward navigation
-  - v-0.84: progress indicator (Question _/_)
+  Design:
+  - All questions visible at once
+  - One Submit button
+  - Unlimited retries
+  - Feedback per question
+  - Finish screen appears ONLY when all answers are correct
+  - One Clear All button resets everything
 */
 
 document.addEventListener("DOMContentLoaded", () => {
 
   const questions = document.querySelectorAll(".question");
+  const submitAllButton = document.getElementById("submit-all");
+  const clearAllButton = document.getElementById("clear-all");
   const quizArea = document.getElementById("quiz-display-area");
-  const totalQuestions = questions.length;
-
-  /* ---------- Progress Indicator ---------- */
-  const progress = document.createElement("div");
-  progress.style.marginBottom = "12px";
-  progress.style.fontFamily = "Helvetica, Arial, system-ui, sans-serif";
-  progress.style.fontSize = "14px";
-  quizArea.prepend(progress);
-
-  function updateProgress(index) {
-    progress.textContent = `Question ${index + 1}/${totalQuestions}`;
-    progress.style.display = "block";
-  }
-
-  /* ---------- Initial State ---------- */
-  questions.forEach((q, i) => {
-    if (i !== 0) q.style.display = "none";
-  });
-
-  updateProgress(0);
 
   /* ---------- Finish Screen ---------- */
   const finishScreen = document.createElement("div");
   finishScreen.style.display = "none";
   finishScreen.innerHTML = `
     <h2>🎉 Quiz Complete</h2>
-    <p>Thank you for completing the A Minor Scales Quiz.</p>
+    <p>Thank you for taking this quiz.</p>
   `;
   quizArea.appendChild(finishScreen);
 
-  /* ---------- Question Logic ---------- */
-  questions.forEach((question, index) => {
-    const submitButton = question.querySelector("button");
-    const radios = question.querySelectorAll("input[type='radio']");
-    const feedback = question.querySelector(".feedback");
+  /* ---------- Submit Logic ---------- */
+  submitAllButton.addEventListener("click", () => {
 
-    const isLastQuestion = index === totalQuestions - 1;
+    let allCorrect = true;
 
-    /* ----- Back Button ----- */
-    const prevButton = document.createElement("button");
-    prevButton.textContent = "Back";
-    prevButton.style.marginTop = "16px";
+    questions.forEach(question => {
+      const radios = question.querySelectorAll("input[type='radio']");
+      const feedback = question.querySelector(".feedback");
 
-    if (index === 0) {
-      prevButton.style.display = "none";
-    } else {
-      prevButton.style.display = "inline-block";
-    }
-
-    question.appendChild(prevButton);
-
-    /* ----- Next / Finish Button ----- */
-    const nextButton = document.createElement("button");
-    nextButton.textContent = isLastQuestion ? "Finish Quiz" : "Next Question";
-    nextButton.style.display = "none";
-    nextButton.style.marginTop = "16px";
-
-    question.appendChild(nextButton);
-
-    /* ----- Submit Logic ----- */
-    submitButton.addEventListener("click", () => {
       let selected = null;
 
       radios.forEach(radio => {
         if (radio.checked) selected = radio;
       });
 
-      if (!selected) return;
-
-      if (selected.dataset.correct === "true") {
-        feedback.textContent = "✅ Correct!";
-
-        radios.forEach(radio => radio.disabled = true);
-        submitButton.disabled = true;
-
-        nextButton.style.display = "inline-block";
+      if (!selected || selected.dataset.correct !== "true") {
+        feedback.textContent = "🤔 That's not the answer. Try again.";
+        allCorrect = false;
       } else {
-        feedback.textContent = "That's not the answer. Try again.";
-        selected.checked = false;
+        feedback.textContent = "✅ Correct";
       }
     });
 
-    /* ----- Forward Navigation ----- */
-    nextButton.addEventListener("click", () => {
-      question.style.display = "none";
+    // Show finish screen only if EVERYTHING is correct
+    if (allCorrect) {
+      finishScreen.style.display = "block";
+    }
+  });
 
-      if (isLastQuestion) {
-        progress.style.display = "none";
-        finishScreen.style.display = "block";
-      } else {
-        questions[index + 1].style.display = "block";
-        updateProgress(index + 1);
-      }
+  /* ---------- Clear All Logic ---------- */
+  clearAllButton.addEventListener("click", () => {
+
+    questions.forEach(question => {
+      const radios = question.querySelectorAll("input[type='radio']");
+      const feedback = question.querySelector(".feedback");
+
+      radios.forEach(radio => {
+        radio.checked = false;
+      });
+
+      feedback.textContent = "";
     });
 
-    /* ----- Backward Navigation ----- */
-    prevButton.addEventListener("click", () => {
-      question.style.display = "none";
-      questions[index - 1].style.display = "block";
-      updateProgress(index - 1);
-    });
+    // Hide finish screen
+    finishScreen.style.display = "none";
   });
 
 });
