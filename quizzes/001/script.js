@@ -1,21 +1,20 @@
 /*
   LimiPlake – A Minor Scales Quiz
-  Version: 1.0
+  Version: 0.90
 
-  Design:
+  Rules:
   - All questions visible at once
-  - One Submit button
   - Unlimited retries
-  - Feedback per question
+  - One Submit button
+  - One Clear All button
   - Finish screen appears ONLY when all answers are correct
-  - One Clear All button resets everything
 */
 
 document.addEventListener("DOMContentLoaded", () => {
 
   const questions = document.querySelectorAll(".question");
-  const submitAllButton = document.getElementById("submit-all");
-  const clearAllButton = document.getElementById("clear-all");
+  const submitAll = document.getElementById("submit-all");
+  const clearAll = document.getElementById("clear-all");
   const quizArea = document.getElementById("quiz-display-area");
 
   /* ---------- Finish Screen ---------- */
@@ -23,12 +22,12 @@ document.addEventListener("DOMContentLoaded", () => {
   finishScreen.style.display = "none";
   finishScreen.innerHTML = `
     <h2>🎉 Quiz Complete</h2>
-    <p>Thank you for taking this quiz.</p>
+    <p>All answers are correct.</p>
   `;
   quizArea.appendChild(finishScreen);
 
   /* ---------- Submit Logic ---------- */
-  submitAllButton.addEventListener("click", () => {
+  submitAll.addEventListener("click", () => {
 
     let allCorrect = true;
 
@@ -50,14 +49,13 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    // Show finish screen only if EVERYTHING is correct
     if (allCorrect) {
       finishScreen.style.display = "block";
     }
   });
 
-  /* ---------- Clear All Logic ---------- */
-  clearAllButton.addEventListener("click", () => {
+  /* ---------- Clear All ---------- */
+  clearAll.addEventListener("click", () => {
 
     questions.forEach(question => {
       const radios = question.querySelectorAll("input[type='radio']");
@@ -70,7 +68,6 @@ document.addEventListener("DOMContentLoaded", () => {
       feedback.textContent = "";
     });
 
-    // Hide finish screen
     finishScreen.style.display = "none";
   });
 
