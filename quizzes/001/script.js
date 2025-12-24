@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       if (!selected || selected.dataset.correct !== "true") {
-        feedback.textContent = "❌ Incorrect";
+        feedback.textContent = "🤔 That's not the answer. Try again.";
         allCorrect = false;
       } else {
         feedback.textContent = "✅ Correct";
