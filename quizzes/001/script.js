@@ -19,6 +19,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const clearAll = document.getElementById("clear-all");
   const quizArea = document.getElementById("quiz-display-area");
 
+  let finishing = false;
+
   /* ---------- Finish Screen ---------- */
   const finishScreen = document.createElement("div");
   finishScreen.innerHTML = `
@@ -49,8 +51,9 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    // If everything is correct, wait 2 seconds then replace the quiz
-    if (allCorrect) {
+    if (allCorrect && !finishing) {
+      finishing = true;
+
       setTimeout(() => {
         quizArea.innerHTML = "";
         quizArea.appendChild(finishScreen);
@@ -71,6 +74,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       feedback.textContent = "";
     });
+
+    finishing = false;
   });
 
 });
