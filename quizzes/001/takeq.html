@@ -21,23 +21,9 @@
 
 <h1>A Minor Scales Quiz</h1>
 
-<!--
-  This is the QUIZ DISPLAY AREA.
-  In the future, JavaScript will ensure
-  that ONLY ONE question inside this area
-  is visible at a time.
--->
-
 <div id="quiz-display-area">
 
-  <!-- ========================= -->
-  <!-- QUESTION 1 (Natural)     -->
-  <!-- ========================= -->
-  <!--
-    JS LOGIC (later):
-    - Show this question first
-    - Hide the others
-  -->
+
   <div class="question" id="question-1">
 
     <h2>Question 1</h2>
@@ -64,25 +50,10 @@
         Melodic
     </label><br><br>
 
-    <!--
-      This Submit button currently does NOTHING.
-      Later, JavaScript will:
-      - read the selected answer
-      - decide if it is correct
-      - replace this question with Question 2
-    -->
-    <button>Submit</button>
     <div id="yni" class="feedback"> </div>
 
   </div>
 
-  <!-- ========================= -->
-  <!-- QUESTION 2 (Harmonic)    -->
-  <!-- ========================= -->
-  <!--
-    JS LOGIC (later):
-    - Hide this until Question 1 is submitted
-  -->
   <div class="question" id="question-2">
 
     <h2>Question 2</h2>
@@ -109,18 +80,10 @@
       Melodic
     </label><br><br>
 
-    <button>Submit</button>
     <div class="feedback" id="ynii"> </div>
 
   </div>
 
-  <!-- ========================= -->
-  <!-- QUESTION 3 (Melodic)     -->
-  <!-- ========================= -->
-  <!--
-    JS LOGIC (later):
-    - Hide this until Question 2 is submitted
-  -->
   <div class="question" id="question-3">
 
     <h2>Question 3</h2>
@@ -146,9 +109,10 @@
       <input type="radio" name="q3" data-correct="true" class="option">
       Melodic
     </label><br><br>
-
-    <button>Submit</button>
+    
     <div id="yniii" class="feedback"> </div>
+    <button id="submit-all">Submit</button>
+    <button id="clear-all">Clear All</button>
 
   </div>
 
