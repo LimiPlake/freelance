@@ -7,7 +7,9 @@
   - Unlimited retries
   - One Submit button
   - One Clear All button
-  - Finish screen appears ONLY when all answers are correct
+  - When ALL answers are correct:
+      wait 2 seconds
+      then replace everything with the finish screen
 */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -19,12 +21,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   /* ---------- Finish Screen ---------- */
   const finishScreen = document.createElement("div");
-  finishScreen.style.display = "none";
   finishScreen.innerHTML = `
     <h2>🎉 Quiz Complete</h2>
-    <p>All answers are correct.</p>
+    <p>Thank you for taking this quiz.</p>
   `;
-  quizArea.appendChild(finishScreen);
 
   /* ---------- Submit Logic ---------- */
   submitAll.addEventListener("click", () => {
@@ -42,15 +42,19 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       if (!selected || selected.dataset.correct !== "true") {
-        feedback.textContent = "🤔 That's not the answer. Try again.";
+        feedback.textContent = "❌ Incorrect";
         allCorrect = false;
       } else {
         feedback.textContent = "✅ Correct";
       }
     });
 
+    // If everything is correct, wait 2 seconds then replace the quiz
     if (allCorrect) {
-      finishScreen.style.display = "block";
+      setTimeout(() => {
+        quizArea.innerHTML = "";
+        quizArea.appendChild(finishScreen);
+      }, 2000);
     }
   });
 
@@ -67,8 +71,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       feedback.textContent = "";
     });
-
-    finishScreen.style.display = "none";
   });
 
 });
