@@ -3,125 +3,107 @@
 <head>
   <meta charset="UTF-8">
   <title>A Minor Scales Quiz – LimiPlake</title>
+
   <style>
     h1, h2 {
       font-family: Helvetica, Arial, system-ui, sans-serif;
     }
+
     .option {
       accent-color: #c1d959;
-      font-family: Times New Roman;
+      font-family: "Times New Roman";
     }
+
+    .options-row {
+      display: flex;
+      gap: 16px;
+      margin: 8px 0;
+    }
+
     .feedback {
       font-family: Candara;
+      margin-top: 6px;
+    }
+
+    #quiz-result {
+      margin-top: 20px;
+      font-family: Candara;
+      font-weight: bold;
     }
   </style>
+
   <script src="script.js"></script>
 </head>
+
 <body>
 
 <h1>A Minor Scales Quiz</h1>
 
 <div id="quiz-display-area">
 
+  <p id="quiz-instruction">
+    Select the minor scale for each picture below.
+  </p>
 
+  <!-- Question 1 -->
   <div class="question" id="question-1">
-
     <h2>Question 1</h2>
 
-    <img
-      src="quih.png"
-      width="400"
-      alt="La Ti Do Re Mi Fa Sol# La">
+    <img src="quih.png" width="400" alt="A minor harmonic scale">
 
-    <p>Which minor scale is shown in the picture above?</p>
+    <div class="options-row">
+      <label><input type="radio" name="q1" class="option"> Natural</label>
+      <label><input type="radio" name="q1" data-correct="true" class="option"> Harmonic</label>
+      <label><input type="radio" name="q1" class="option"> Melodic</label>
+    </div>
 
-    <label>
-      <input type="radio" name="q1" class="option">
-        Natural
-    </label><br>
-
-    <label>
-      <input type="radio" name="q1" data-correct="true" class="option">
-       Harmonic
-    </label><br>
-
-    <label>
-      <input type="radio" name="q1" class="option">
-        Melodic
-    </label><br><br>
-
-    <div id="yni" class="feedback"> </div>
-
+    <div class="feedback"></div>
   </div>
 
+  <!-- Question 2 -->
   <div class="question" id="question-2">
-
     <h2>Question 2</h2>
 
-    <img
-      src="quin.png"
-      width="400"
-      alt="La Ti Do Re Mi Fa Sol La">
+    <img src="quin.png" width="400" alt="A minor natural scale">
 
-    <p>Which minor scale is shown in the picture above?</p>
+    <div class="options-row">
+      <label><input type="radio" name="q2" data-correct="true" class="option"> Natural</label>
+      <label><input type="radio" name="q2" class="option"> Harmonic</label>
+      <label><input type="radio" name="q2" class="option"> Melodic</label>
+    </div>
 
-    <label>
-      <input type="radio" name="q2" data-correct="true" class="option">
-      Natural
-    </label><br>
-
-    <label>
-      <input type="radio" name="q2" class="option">
-      Harmonic
-    </label><br>
-
-    <label>
-      <input type="radio" name="q2" class="option">
-      Melodic
-    </label><br><br>
-
-    <div class="feedback" id="ynii"> </div>
-
+    <div class="feedback"></div>
   </div>
 
+  <!-- Question 3 -->
   <div class="question" id="question-3">
-
     <h2>Question 3</h2>
 
-    <img
-      src="quim.png"
-      width="400"
-      alt="La Ti Do Re Mi Fa# Sol# La">
+    <img src="quim.png" width="400" alt="A minor melodic scale">
 
-    <p>Which minor scale is shown in the picture above?</p>
+    <div class="options-row">
+      <label><input type="radio" name="q3" class="option"> Natural</label>
+      <label><input type="radio" name="q3" class="option"> Harmonic</label>
+      <label><input type="radio" name="q3" data-correct="true" class="option"> Melodic</label>
+    </div>
 
-    <label>
-      <input type="radio" name="q3" class="option">
-      Natural
-    </label><br>
-
-    <label>
-      <input type="radio" name="q3" class="option">
-      Harmonic
-    </label><br>
-
-    <label>
-      <input type="radio" name="q3" data-correct="true" class="option">
-      Melodic
-    </label><br><br>
-    
-    <div id="yniii" class="feedback"> </div>
-    <button id="submit-all">Submit</button>
-    <button id="clear-all">Clear All</button>
-
+    <div class="feedback"></div>
   </div>
 
+  <!-- Global controls -->
+  <button id="submit-all">Submit</button>
+  <button id="clear-all">Clear All</button>
+
+  <!-- Result message -->
+  <div id="quiz-result"></div>
+
 </div>
+
 <footer>
-  <br><br><strong>
+  <br><strong>
     From LimiPlake Freelance Gigs — our customer is always right!
   </strong>
 </footer>
 
 </body>
-</html>  
+</html>
