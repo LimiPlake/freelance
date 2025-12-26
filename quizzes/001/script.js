@@ -45,13 +45,15 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
+    const correctCount = totalQuestions - incorrectCount;
+
     /* ---------- Result Message ---------- */
-    if (incorrectCount === 0) {
+    if (correctCount === totalQuestions) {
       resultBox.textContent =
-        `🎉 You got ${totalQuestions}/${totalQuestions} correct! Congratulations.`;
+        `🎉 You got ${correctCount}/${totalQuestions} correct! Congratulations.`;
     } else {
       resultBox.textContent =
-        `${incorrectCount}/${totalQuestions} answer(s) are incorrect, try again.`;
+        `${correctCount}/${totalQuestions} correct. Try again.`;
     }
   });
 
