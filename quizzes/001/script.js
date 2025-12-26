@@ -38,10 +38,10 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       if (!selected || selected.dataset.correct !== "true") {
-        feedback.textContent = "❌ Incorrect";
+        feedback.textContent = "🤔 That's not right. Try again.";
         incorrectCount++;
       } else {
-        feedback.textContent = "✅ Correct";
+        feedback.textContent = "✅ Correct!";
       }
     });
 
