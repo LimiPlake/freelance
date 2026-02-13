@@ -9,15 +9,32 @@
       font-family: Helvetica, Arial, system-ui, sans-serif;
     }
 
+    #quiz-instruction {
+      font-family: Helvetica, Arial, system-ui, sans-serif;
+      margin-bottom: 16px;
+    }
+
+    .question {
+      margin-bottom: 28px;
+    }
+
     .option {
       accent-color: #c1d959;
-      font-family: "Times New Roman";
+      margin-right: 6px;
     }
 
     .options-row {
       display: flex;
-      gap: 16px;
-      margin: 8px 0;
+      gap: 20px;
+      margin: 10px 0;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .options-row img {
+      border: 1px solid #ddd;
+      padding: 4px;
+      cursor: pointer;
     }
 
     .feedback {
@@ -29,6 +46,18 @@
       margin-top: 20px;
       font-family: Candara;
       font-weight: bold;
+      font-size: 16px;
+    }
+
+    button {
+      margin-right: 10px;
+      padding: 6px 12px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    footer {
+      margin-top: 40px;
     }
   </style>
 
@@ -42,65 +71,111 @@
 <div id="quiz-display-area">
 
   <p id="quiz-instruction">
-    Select the minor scale for each picture below.
+    Select the correct answer for each item below.
   </p>
 
-  <!-- Question 1 -->
-  <div class="question" id="question-1">
+  <!-- ===================== -->
+  <!-- Question 1 (Image → Text) -->
+  <!-- ===================== -->
+  <div class="question">
+
     <h2>Question 1</h2>
 
     <img src="quih.png" width="400" alt="A minor harmonic scale">
 
     <div class="options-row">
-      <label><input type="radio" name="q1" class="option"> Natural</label>
-      <label><input type="radio" name="q1" data-correct="true" class="option"> Harmonic</label>
-      <label><input type="radio" name="q1" class="option"> Melodic</label>
+      <label>
+        <input type="radio" name="q1" class="option">
+        Natural
+      </label>
+
+      <label>
+        <input type="radio" name="q1" data-correct="true" class="option">
+        Harmonic
+      </label>
+
+      <label>
+        <input type="radio" name="q1" class="option">
+        Melodic
+      </label>
     </div>
 
     <div class="feedback"></div>
   </div>
 
-  <!-- Question 2 -->
-  <div class="question" id="question-2">
+  <!-- ===================== -->
+  <!-- Question 2 (Image → Text) -->
+  <!-- ===================== -->
+  <div class="question">
+
     <h2>Question 2</h2>
 
     <img src="quin.png" width="400" alt="A minor natural scale">
 
     <div class="options-row">
-      <label><input type="radio" name="q2" data-correct="true" class="option"> Natural</label>
-      <label><input type="radio" name="q2" class="option"> Harmonic</label>
-      <label><input type="radio" name="q2" class="option"> Melodic</label>
+      <label>
+        <input type="radio" name="q2" data-correct="true" class="option">
+        Natural
+      </label>
+
+      <label>
+        <input type="radio" name="q2" class="option">
+        Harmonic
+      </label>
+
+      <label>
+        <input type="radio" name="q2" class="option">
+        Melodic
+      </label>
     </div>
 
     <div class="feedback"></div>
   </div>
 
-  <!-- Question 3 -->
-  <div class="question" id="question-3">
+  <!-- ===================== -->
+  <!-- Question 3 (Text → Image) -->
+  <!-- ===================== -->
+  <div class="question">
+
     <h2>Question 3</h2>
 
-    <img src="quim.png" width="400" alt="A minor melodic scale">
+    <p>Which image shows the A minor melodic scale?</p>
 
     <div class="options-row">
-      <label><input type="radio" name="q3" class="option"> Natural</label>
-      <label><input type="radio" name="q3" class="option"> Harmonic</label>
-      <label><input type="radio" name="q3" data-correct="true" class="option"> Melodic</label>
+
+      <label>
+        <input type="radio" name="q3" class="option">
+        <img src="quih.png" width="140" alt="Harmonic scale">
+      </label>
+
+      <label>
+        <input type="radio" name="q3" class="option">
+        <img src="quin.png" width="140" alt="Natural scale">
+      </label>
+
+      <label>
+        <input type="radio" name="q3" data-correct="true" class="option">
+        <img src="quim.png" width="140" alt="Melodic scale">
+      </label>
+
     </div>
 
     <div class="feedback"></div>
   </div>
 
-  <!-- Global controls -->
+  <!-- ===================== -->
+  <!-- Global Controls -->
+  <!-- ===================== -->
+
   <button id="submit-all">Submit</button>
   <button id="clear-all">Clear All</button>
 
-  <!-- Result message -->
   <div id="quiz-result"></div>
 
 </div>
 
 <footer>
-  <br><strong>
+  <strong>
     From LimiPlake Freelance Gigs — our customer is always right!
   </strong>
 </footer>
