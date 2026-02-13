@@ -1,23 +1,50 @@
 /*
   LimiPlake – A Minor Scales Quiz
-  Version: 0.94
+  Version: 1.1
 
-  Behavior:
-  - All questions visible at once
+  Features:
+  - 6 questions
+  - Mixed question types (image→text and text→image)
+  - Question order randomized
+  - Option order randomized
   - Unlimited retries
-  - One global Submit button
-  - One global Clear All button
-  - Per-question feedback (Correct / Incorrect)
-  - Result message shown at bottom
-  - NO page replacement
+  - Single Submit button
+  - Single Clear All button
+  - Shows number of correct answers
 */
 
 document.addEventListener("DOMContentLoaded", () => {
 
-  const questions = document.querySelectorAll(".question");
+  const quizArea = document.getElementById("quiz-display-area");
   const submitAll = document.getElementById("submit-all");
   const clearAll = document.getElementById("clear-all");
   const resultBox = document.getElementById("quiz-result");
+
+  // Convert NodeList to array so we can shuffle
+  let questions = Array.from(document.querySelectorAll(".question"));
+
+  /* ---------- Shuffle Helper (Fisher–Yates) ---------- */
+  function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+  }
+
+  /* ---------- Randomize Question Order ---------- */
+  shuffle(questions);
+  questions.forEach(q => quizArea.appendChild(q));
+
+  /* ---------- Randomize Options Inside Each Question ---------- */
+  questions.forEach(question => {
+    const optionsRow = question.querySelector(".options-row");
+    if (!optionsRow) return;
+
+    const options = Array.from(optionsRow.children);
+    shuffle(options);
+
+    options.forEach(option => optionsRow.appendChild(option));
+  });
 
   /* ---------- Submit Logic ---------- */
   submitAll.addEventListener("click", () => {
@@ -26,6 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const totalQuestions = questions.length;
 
     questions.forEach(question => {
+
       const radios = question.querySelectorAll("input[type='radio']");
       const feedback = question.querySelector(".feedback");
 
@@ -43,11 +71,11 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         feedback.textContent = "✅ Correct!";
       }
+
     });
 
     const correctCount = totalQuestions - incorrectCount;
 
-    /* ---------- Result Message ---------- */
     if (correctCount === totalQuestions) {
       resultBox.textContent =
         `🎉 You got ${correctCount}/${totalQuestions} correct! Congratulations.`;
@@ -55,12 +83,14 @@ document.addEventListener("DOMContentLoaded", () => {
       resultBox.textContent =
         `${correctCount}/${totalQuestions} correct. Try again.`;
     }
+
   });
 
   /* ---------- Clear All Logic ---------- */
   clearAll.addEventListener("click", () => {
 
     questions.forEach(question => {
+
       const radios = question.querySelectorAll("input[type='radio']");
       const feedback = question.querySelector(".feedback");
 
@@ -69,9 +99,11 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       feedback.textContent = "";
+
     });
 
     resultBox.textContent = "";
+
   });
 
 });
