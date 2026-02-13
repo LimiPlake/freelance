@@ -59,6 +59,18 @@
     footer {
       margin-top: 40px;
     }
+    .options-row img {
+      width: 220px;          /* Increase from 140 */
+      height: auto;
+      border: 1px solid #ddd;
+      padding: 4px;
+      cursor: pointer;
+      transition: transform 0.15s ease;
+  }
+
+  .options-row img:hover {
+    transform: scale(1.05);
+  }
   </style>
 
   <script src="script.js"></script>
@@ -76,7 +88,6 @@
 
   <!-- Q1 Image → Text -->
   <div class="question">
-    <h2>Question</h2>
     <img src="quih.png" width="400" alt="A minor harmonic scale">
     <div class="options-row">
       <label><input type="radio" name="q1" class="option"> Natural</label>
@@ -88,7 +99,6 @@
 
   <!-- Q2 Image → Text -->
   <div class="question">
-    <h2>Question</h2>
     <img src="quin.png" width="400" alt="A minor natural scale">
     <div class="options-row">
       <label><input type="radio" name="q2" data-correct="true" class="option"> Natural</label>
@@ -100,7 +110,6 @@
 
   <!-- Q3 Image → Text -->
   <div class="question">
-    <h2>Question</h2>
     <img src="quim.png" width="400" alt="A minor melodic scale">
     <div class="options-row">
       <label><input type="radio" name="q3" class="option"> Natural</label>
@@ -112,36 +121,33 @@
 
   <!-- Q4 Text → Image -->
   <div class="question">
-    <h2>Question</h2>
     <p>Which image shows the A minor harmonic scale?</p>
     <div class="options-row">
-      <label><input type="radio" name="q4" class="option"><img src="quin.png" width="140"></label>
-      <label><input type="radio" name="q4" data-correct="true" class="option"><img src="quih.png" width="140"></label>
-      <label><input type="radio" name="q4" class="option"><img src="quim.png" width="140"></label>
+      <label><input type="radio" name="q4" class="option"><img src="quin.png"></label>
+      <label><input type="radio" name="q4" data-correct="true" class="option"><img src="quih.png"></label>
+      <label><input type="radio" name="q4" class="option"><img src="quim.png"></label>
     </div>
     <div class="feedback"></div>
   </div>
 
   <!-- Q5 Text → Image -->
   <div class="question">
-    <h2>Question</h2>
     <p>Which image shows the A minor natural scale?</p>
     <div class="options-row">
-      <label><input type="radio" name="q5" data-correct="true" class="option"><img src="quin.png" width="140"></label>
-      <label><input type="radio" name="q5" class="option"><img src="quim.png" width="140"></label>
-      <label><input type="radio" name="q5" class="option"><img src="quih.png" width="140"></label>
+      <label><input type="radio" name="q5" data-correct="true" class="option"><img src="quin.png"></label>
+      <label><input type="radio" name="q5" class="option"><img src="quim.png"></label>
+      <label><input type="radio" name="q5" class="option"><img src="quih.png"></label>
     </div>
     <div class="feedback"></div>
   </div>
 
   <!-- Q6 Text → Image -->
   <div class="question">
-    <h2>Question</h2>
     <p>Which image shows the A minor melodic scale?</p>
     <div class="options-row">
-      <label><input type="radio" name="q6" class="option"><img src="quih.png" width="140"></label>
-      <label><input type="radio" name="q6" class="option"><img src="quin.png" width="140"></label>
-      <label><input type="radio" name="q6" data-correct="true" class="option"><img src="quim.png" width="140"></label>
+      <label><input type="radio" name="q6" class="option"><img src="quih.png"></label>
+      <label><input type="radio" name="q6" class="option"><img src="quin.png"></label>
+      <label><input type="radio" name="q6" data-correct="true" class="option"><img src="quim.png"></label>
     </div>
     <div class="feedback"></div>
   </div>
