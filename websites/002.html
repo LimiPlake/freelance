@@ -23,14 +23,20 @@ body {
 
 .white-key {
     position: absolute;
+    top: 0;
     width: 40px;
     height: 220px;
+    background: rgba(255,0,0,0.3);
+    z-index: 100;
 }
 
 .black-key {
     position: absolute;
+    top: 0;
     width: 25px;
     height: 140px;
+    background: rgba(0,0,255,0.3);
+    z-index: 101;
 }
 </style>
 </head>
@@ -69,16 +75,16 @@ body {
     <div class="white-key" style="left:575px" onclick="playNote(493.88)"></div>
 
     <div class="white-key" style="left:600px" onclick="playNote(523.25)"></div>
-    <div class="key" style="left:625px" onclick="playNote(554.37)"></div>
+    <div class="black-key" style="left:625px" onclick="playNote(554.37)"></div>
     <div class="white-key" style="left:650px" onclick="playNote(587.33)"></div>
-    <div class="key" style="left:675px" onclick="playNote(622.25)"></div>
+    <div class="black-key" style="left:675px" onclick="playNote(622.25)"></div>
     <div class="white-key" style="left:700px" onclick="playNote(659.25)"></div>
     <div class="white-key" style="left:725px" onclick="playNote(698.46)"></div>
-    <div class="key" style="left:750px" onclick="playNote(739.99)"></div>
+    <div class="black-key" style="left:750px" onclick="playNote(739.99)"></div>
     <div class="white-key" style="left:775px" onclick="playNote(783.99)"></div>
-    <div class="key" style="left:800px" onclick="playNote(830.61)"></div>
+    <div class="black-key" style="left:800px" onclick="playNote(830.61)"></div>
     <div class="white-key" style="left:825px" onclick="playNote(880.00)"></div>
-    <div class="key" style="left:800px" onclick="playNote(932.33)"></div>
+    <div class="black-key" style="left:800px" onclick="playNote(932.33)"></div>
     <div class="white-key" style="left:825px" onclick="playNote(987.77)"></div>
 </div>
 
