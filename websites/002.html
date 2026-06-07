@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Virtual Piano</title>
+
+<style>
+body {
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+#piano {
+    position: relative;
+    width: 900px;
+    margin: auto;
+}
+
+#piano img {
+    width: 100%;
+    display: block;
+}
+
+.key {
+    position: absolute;
+    top: 0;
+    height: 220px;
+    width: 25px;
+    cursor: pointer;
+}
+
+.key:hover {
+    background: rgba(0, 0, 255, 0.15);
+}
+</style>
+</head>
+<body>
+
+<h2>Click a Key</h2>
+
+<div id="piano">
+    <img src="keyboard.png" alt="Piano">
+
+    <!-- White keys -->
+    <div class="key" style="left:0px" onclick="playNote(130.81)"></div>
+    <div class="key" style="left:25px" onclick="playNote(146.83)"></div>
+    <div class="key" style="left:50px" onclick="playNote(164.81)"></div>
+    <div class="key" style="left:75px" onclick="playNote(174.61)"></div>
+    <div class="key" style="left:100px" onclick="playNote(196.00)"></div>
+    <div class="key" style="left:125px" onclick="playNote(220.00)"></div>
+    <div class="key" style="left:150px" onclick="playNote(246.94)"></div>
+
+    <div class="key" style="left:175px" onclick="playNote(261.63)"></div>
+    <div class="key" style="left:200px" onclick="playNote(293.66)"></div>
+    <div class="key" style="left:225px" onclick="playNote(329.63)"></div>
+    <div class="key" style="left:250px" onclick="playNote(349.23)"></div>
+    <div class="key" style="left:275px" onclick="playNote(392.00)"></div>
+    <div class="key" style="left:300px" onclick="playNote(440.00)"></div>
+    <div class="key" style="left:325px" onclick="playNote(493.88)"></div>
+
+    <div class="key" style="left:350px" onclick="playNote(523.25)"></div>
+    <div class="key" style="left:375px" onclick="playNote(587.33)"></div>
+    <div class="key" style="left:400px" onclick="playNote(659.25)"></div>
+    <div class="key" style="left:425px" onclick="playNote(698.46)"></div>
+    <div class="key" style="left:450px" onclick="playNote(783.99)"></div>
+    <div class="key" style="left:475px" onclick="playNote(880.00)"></div>
+    <div class="key" style="left:500px" onclick="playNote(987.77)"></div>
+</div>
+
+<script>
+const ctx = new (window.AudioContext || window.webkitAudioContext)();
+
+function playNote(freq) {
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+
+    osc.type = "triangle";
+    osc.frequency.value = freq;
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+
+    gain.gain.setValueAtTime(0.25, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(
+        0.001,
+        ctx.currentTime + 1
+    );
+
+    osc.start();
+    osc.stop(ctx.currentTime + 1);
+}
+</script>
+
+</body>
+</html>
