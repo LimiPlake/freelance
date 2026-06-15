@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Virtual Piano</title>
+<title>LimiPlake Virtual Piano</title>
 
 <style>
 body {
@@ -94,7 +94,9 @@ body {
 </head>
 <body>
 
-<h2>Click a Key</h2>
+<h2>Play Music on LimiPlake's Digital Keyboard</h2>
+<img src="logo.png" height="100px" width="200px">
+<em>Last updated: June 14th, 2026</em>
 
 <div id="piano">
     <img src="keyboard.png" alt="Piano">
@@ -139,6 +141,8 @@ body {
     <div class="black-key" style="left:850px" onclick="playNote(932.33)"></div>
     <div class="white-key-left" style="left:875px" onclick="playNote(987.77)"></div>
 </div>
+
+<p><strong>Our customer is always right.</strong></p>
 
 <script>
 const ctx = new (window.AudioContext || window.webkitAudioContext)();
